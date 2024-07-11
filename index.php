@@ -16,11 +16,8 @@
 
     .btn-primary:hover {
         background-color: #00695c;
-        /* Darker shade of primary color */
         border-color: #00695c;
-        /* Darker shade of primary color */
         transform: scale(1.1);
-        /* Scale up by 10% on hover */
     }
 
     .card {
@@ -29,9 +26,7 @@
 
     .card:hover {
         transform: scale(1.05);
-        /* Scale up by 5% on hover */
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        /* Add box-shadow on hover */
     }
     </style>
     <title>CodeBlogs</title>
@@ -40,7 +35,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.php">
                 <img src="logo.png" alt="logo">
                 CodeBLogs
             </a>
@@ -52,7 +47,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="post-blogs.php">Post Blogs</a>

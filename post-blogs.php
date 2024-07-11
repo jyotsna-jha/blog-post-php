@@ -1,6 +1,3 @@
-<?php
-include('handle-form.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,15 +7,35 @@ include('handle-form.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Post Blogs</title>
+
     <style>
     .center-form {
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 80vh;
-        /* Adjusted minimum height */
         margin-top: 50px;
-        /* Adjusted margin top */
+    }
+
+    .btn-primary {
+        background-color: #00897B;
+        border-color: #00897B;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #00695c;
+        border-color: #00695c;
+        transform: scale(1.1);
+    }
+
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
     </style>
 </head>
@@ -27,7 +44,7 @@ include('handle-form.php');
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.php">
                 <img src="logo.png" alt="logo">
                 CodeBLogs
             </a>
@@ -39,7 +56,7 @@ include('handle-form.php');
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="post-blogs.php">Post Blogs</a>
@@ -48,41 +65,66 @@ include('handle-form.php');
             </div>
         </div>
     </nav>
-
-    <div class="center-form">
-        <form style="width: 50%;" method="post" action="">
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name" required>
+    <br />
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"
+                            placeholder="Enter blog title" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="25"
+                            name="content"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-primary">
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
-                    required>
-            </div>
-            <div class="mb-3">
-                <label for="blog-text" class="form-label">Enter Your Blog Text</label>
-                <textarea class="form-control" id="blog-text" name="blog-text" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="background-color: #00897B;">Submit</button>
-        </form>
+            <div class="col-md-2"></div>
+        </div>
     </div>
-    <?php
-     if(isset($_POST['submit'])){
-        $name=$_POST['name'];
-       $email=$_POST['email'];
-      $blog-text=$_POST['blog-text'];
+    <br />
 
-        $res=mysqli_query($mysqli,"INSERT into blog-post values("$name","$email","$blog-text")");
-      
-       if($res){
-         echo "Success";
-       }
-       else{
-            echo "Failed";
-       }
-     }
-?>
+    <footer class="footer mt-auto py-3" style="background-color: #00897B;">
+        <div class="container text-center">
+            <span class="text-white">&copy; 2024 CodeBlogs. All rights reserved.</span>
+        </div>
+    </footer>
+
+
+    <?php
+        $title = $content = "";
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "testdb";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // echo var_dump($_POST);
+            $title = $_POST["title"];
+            $content = $_POST["content"];
+            $sql = "INSERT INTO blog (title,content) VALUES ('$title','$content')";
+            if ($conn->query($sql) === TRUE) {
+                echo "New record created successfully";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+
+            $conn->close();
+        }
+        ?>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
