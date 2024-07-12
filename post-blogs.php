@@ -78,7 +78,7 @@
                             placeholder="Enter blog title" name="title">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+                        <label for="exampleFormControlTextarea1" class="form-label">Blog Content</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="25"
                             name="content"></textarea>
                     </div>
